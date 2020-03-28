@@ -11,4 +11,8 @@ urlpatterns = [
     path('Blog/delete/<int:blog_id>', views.delete_confirmation_page, name="blog_delete_confirmation"),
     path('Blog/delete/confirm/<int:blog_id>', views.delete_post, name="blog_delete"),
     path('Blog/display/<int:blog_id>', views.display_post, name="blog_display"),
+    path('Blog/author/signup', views.signup_page, name="author_signup_page"),
+    path('Blog/author/signup/confirm', views.signup, name="author_signup"),
+    path('Blog/author/signin', views.sign_in_page, name="author_login_page"),
+    path('Blog/author/signin/confirm', views.signin, name="author_login"),
 ]

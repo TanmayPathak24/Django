@@ -37,11 +37,16 @@
                             <a class="nav-link" href="/Blog/newBlog/">New Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Link</a>
+                            <a class="nav-link" href="/Blog/author/signin">LogIn</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link disabled" href="#">Disabled</a>
+                            <a class="nav-link" href="/Blog/author/signup">Sign up</a>
                         </li>
+                        {% if box.avatar %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">{{box.avatar}}</a>
+                        </li>
+                        {% endif %}
                     </ul>
                     <form class="form-inline my-2 my-lg-0">
                         <input class="form-control mr-sm-2" type="search" placeholder="Search Blog" aria-label="Search">

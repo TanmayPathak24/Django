@@ -18,9 +18,19 @@ def home(request):
         temp.append(post)
 
     posts = temp
-    context = {
-        'posts': posts
-    }
+    print(user)
+    if user is not None:
+        context = {
+            'posts': {},
+            'box':{
+                'avatar':user
+            }
+        }
+    else:
+        context = {
+            'posts': {}
+        }
+
     return render(request, 'blog/home.html', context)
 
 
@@ -101,6 +111,50 @@ def display_post(request, blog_id):
     return render(request, 'blog/blog_display.html', {'blog':content})
 
 
+# Author signup page loading
+from .forms import AuthorSignup
+def signup_page(request):
+    sign_up_form = AuthorSignup()
+    return render(request, 'blog/signup.html', {'form':sign_up_form})
+
+from .models import Author
+def signup(request):
+    sign_up_form = AuthorSignup(request.POST)
+    new_author = Author()
+    if sign_up_form.is_valid():
+        new_author.author_name = sign_up_form.cleaned_data['author_name']
+        new_author.avatar = sign_up_form.cleaned_data['avatar']
+        description = sign_up_form.cleaned_data['description']
+        if len(description) == 0:
+            description = "No Description"
+        new_author.description = description
+        new_author.password = sign_up_form.cleaned_data['password']
+        # save the author
+        new_author.save()
+    else:
+        return signup_page()
+    return HttpResponseRedirect("/")
+
+
+from .forms import AuthorSignIn
+def sign_in_page(request):
+    sign_in_form = AuthorSignIn()
+    return render(request, 'blog/signin.html', {'form':sign_in_form})
+
+
+
+user = None
+def signin(request):
+    sing_in_form = AuthorSignIn(request.POST)
+    if sing_in_form.is_valid():
+        print(sing_in_form.cleaned_data['avatar'])
+        user = sing_in_form.cleaned_data['avatar']
+    return HttpResponseRedirect("/")
+
+
+
+
+
 
 # utility functions
 def getBlogs():
@@ -109,10 +163,12 @@ def getBlogs():
     for blog in blogs:
         temp = {
             'id': blog.id,
-            'author': blog.author,
+            'author_id': blog.author_id,
             'title': blog.title,
             'publish_date': blog.publish_date,
-            'content': blog.content
+            'content': blog.content,
+            'last_modified': blog.last_modified
         }
         posts.append(temp)
+        print(blog)
     return posts
