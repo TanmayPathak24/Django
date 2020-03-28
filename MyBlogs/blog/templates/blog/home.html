@@ -1,0 +1,57 @@
+{% extends 'blog/base.html' %} {% load static %} {% block content %}
+<!-- Page Content -->
+<div class="container my-blog-container">
+  <div class="row">
+    <div class="col-md-2"></div>
+    <!-- Blog Entries Column -->
+    <div class="col-md-8">
+      {% for post in posts %}
+      <div class="row container-fluid">
+        <div class="col">
+          <!-- Blog Post -->
+          <div class="container-fluid my-blog">
+            <div class="my-blog-title">
+              <h4>{{post.title}}</h4>
+            </div>
+            <hr/>
+            <div class="my-blog-summary my-block">
+              <p>{{post.content}}{% if post.length_status %}<a href="{% url 'blog_display' blog_id=post.id %}">Read More</a></p>{% endif %}
+            </div>
+            <hr>
+
+            <div class="my-blog-footer">
+              <div class="row my-block">
+                <div class="col my-blog-author">
+                  <small>@Author:&nbsp;&nbsp;&nbsp;</small>{{post.author}}
+                </div>
+                <div class="col my-blog-date">
+                  <small>@Publish Date:&nbsp;&nbsp;&nbsp;</small
+                  >{{post.publish_date}}
+                </div>
+              </div>
+              <div class="row my-block">
+                <div class="col my-button">
+                  <a
+                    class="btn btn-primary"
+                    href="{% url 'blog_update_page' blog_id=post.id %}"
+                    >Upadte</a
+                  >
+                </div>
+                <div class="col my-button">
+                  <a
+                    class="btn btn-danger"
+                    href="{% url 'blog_delete_confirmation' blog_id=post.id %}"
+                    >Delete</a
+                  >
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class="col-md-2"></div>
+  </div>
+</div>
+{% endblock content %}

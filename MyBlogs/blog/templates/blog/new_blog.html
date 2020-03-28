@@ -1,0 +1,34 @@
+{% extends 'blog/base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+  <div class="col-2"></div>
+  <div class="col-8">
+    <div class="container my-new-blog-container">
+      <div class="my-blog-title">
+        <h4>New Blog</h4>
+      </div>
+      <hr>
+      <form name="form" action="/Blog/new_blog_entry/" method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+          {{form.author|as_crispy_field}}
+        </div>
+        <div class="form-group">
+          {{form.title|as_crispy_field}}
+        </div>
+        <div class="form-group">
+          {{form.content|as_crispy_field}}
+        </div>
+        <div class="my-button">
+          <button type="submit" class="btn btn-success">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="col-2"></div>
+</div>
+
+{% endblock content %}

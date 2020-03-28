@@ -1,0 +1,31 @@
+{% extends 'blog/base.html'%}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-2"></div>
+    <div class="col-8">
+        <div class="container my-new-blog-container">
+            <div class="my-blog-title">
+                <h4>Update Post</h4>
+            </div>
+            <hr>
+            <form name="form" action="{% url 'blog_update' blog_id=blog_id %}" method="POST">{% csrf_token %}
+                <div class="form-group">
+                    {{form.author|as_crispy_field}}
+                </div>
+                <div class="form-group">
+                    {{form.title|as_crispy_field}}
+                </div>
+                <div class="form-group my-blog-text">
+                    {{form.content|as_crispy_field}}
+                </div>
+                <div class="my-blog-update-button">
+                    <button type="submit" class="btn btn-success"><h5 class="my-blog-heading-text">Update</h5></button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="col-2"></div>
+</div>
+{% endblock content%}

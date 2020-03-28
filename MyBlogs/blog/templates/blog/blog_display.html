@@ -1,0 +1,48 @@
+<!--Loding the base.html -->
+{% extends 'blog/base.html' %}
+
+<!--Load static files-->
+{% load static %}
+
+<!--Load the block -->
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-1"></div>
+        <div class="col-10 my-container">
+            <div class="row">
+                <div class="col my-block">
+                    <h3>{{blog.title}}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col my-blog-display"><p><small>@Author:&nbsp;&nbsp;&nbsp;</small><a href="#">{{blog.author}}</a></p></div>
+                <div class="col my-blog-display my-blog-display-publish-date"><p><small>@Publish Date:&nbsp;&nbsp;&nbsp;</small>{{blog.publish_date}}</p></div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col">
+                    <div class="my-blog-text">{{blog.content|linebreaks}}</div>
+                </div>
+            </div>
+            <div class="row my-block">
+                <div class="col my-button">
+                  <a
+                    class="btn btn-primary"
+                    href="{% url 'blog_update_page' blog_id=blog.blog_id %}"
+                    >Upadte</a
+                  >
+                </div>
+                <div class="col my-button">
+                  <a
+                    class="btn btn-danger"
+                    href="{% url 'blog_delete_confirmation' blog_id=blog.blog_id %}"
+                    >Delete</a
+                  >
+                </div>
+              </div>
+        </div>
+        <div class="col-1"></div>
+    </div>
+</div>
+{% endblock content %}

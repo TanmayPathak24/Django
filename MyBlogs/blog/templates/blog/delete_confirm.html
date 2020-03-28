@@ -1,0 +1,58 @@
+<!--Loading the base html page -->
+{% extends 'blog/base.html'%}
+
+<!--Loading the static block -->
+{% load static %}
+
+<!--Loading the block of the base.html -->
+{% block content %}
+
+<!--delete_confirm.html content -->
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="my-container">
+                <div class="my-blog-title">
+                    <h4>Delete Post</h4>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <div class="row my-block">
+                            <div class="col">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Author</th>
+                                            <th scope="col">Publish Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{content.title}}</td>
+                                            <td>{{content.author}}</td>
+                                            <td>{{content.publish_date}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row my-block">
+                            <div class="col my-button">
+                                <a class="btn btn-primary" href="/">Cancel</a>
+                            </div>
+                            <div class="col my-button">
+                                <a class="btn btn-danger" href="{% url 'blog_delete' blog_id=content.blog_id %}">Confirm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+
+{% endblock content %}
