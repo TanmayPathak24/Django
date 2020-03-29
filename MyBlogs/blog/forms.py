@@ -55,3 +55,7 @@ class AuthorSignIn(forms.ModelForm):
                     'avatar': 'Avatar',
                     'password': 'Enter Password'
                 }
+
+
+class Input(forms.Form):
+    content = forms.TextInput()

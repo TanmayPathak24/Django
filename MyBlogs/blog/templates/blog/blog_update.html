@@ -1,19 +1,24 @@
+<!--loading base template-->
 {% extends 'blog/base.html'%}
+<!-- loading crispy forms-->
 {% load crispy_forms_tags %}
+<!--loading css and js-->
 {% load static %}
+<!-- override content block-->
 {% block content %}
 <div class="row">
     <div class="col-2"></div>
+
+    <!--start- update-->
     <div class="col-8">
         <div class="container my-new-blog-container">
             <div class="my-blog-title">
                 <h4>Update Post</h4>
             </div>
             <hr>
+
+            <!--start- form-->
             <form name="form" action="{% url 'blog_update' blog_id=blog_id %}" method="POST">{% csrf_token %}
-                <div class="form-group">
-                    {{form.author|as_crispy_field}}
-                </div>
                 <div class="form-group">
                     {{form.title|as_crispy_field}}
                 </div>
@@ -21,11 +26,17 @@
                     {{form.content|as_crispy_field}}
                 </div>
                 <div class="my-blog-update-button">
-                    <button type="submit" class="btn btn-success"><h5 class="my-blog-heading-text">Update</h5></button>
+                    <button type="submit" class="btn btn-success">
+                        <h5 class="my-blog-heading-text">Update</h5>
+                    </button>
                 </div>
             </form>
+            <!--end- form-->
+            
         </div>
     </div>
+    <!--end- update-->
+
     <div class="col-2"></div>
 </div>
 {% endblock content%}

@@ -15,4 +15,6 @@ urlpatterns = [
     path('Blog/author/signup/confirm', views.signup, name="author_signup"),
     path('Blog/author/signin', views.sign_in_page, name="author_login_page"),
     path('Blog/author/signin/confirm', views.signin, name="author_login"),
+    path('Blog/author/logout', views.logout, name="author_logout"),
+    path('Blog/search', views.search, name="blog_search"),
 ]

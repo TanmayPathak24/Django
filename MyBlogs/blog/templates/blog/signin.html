@@ -1,4 +1,3 @@
-
 {% extends 'blog/base.html'%}
 {% load crispy_forms_tags %}
 {% load static %}
@@ -14,12 +13,20 @@
       <hr>
       <form name="form" action="/Blog/author/signin/confirm" method="POST">
         {% csrf_token %}
+
+        <!-- Show error message -->
+        {% if err.msg %}
+        <div class="alert alert-danger" role="alert">
+          {{err.msg}}
+        </div>
+        {% endif %}
+
         <div class="form-group">
           {{form.avatar|as_crispy_field}}
         </div>
         <div class="form-group">
-            {{form.password|as_crispy_field}}
-          </div>
+          {{form.password|as_crispy_field}}
+        </div>
         <div class="my-button">
           <button type="submit" class="btn btn-success">Submit</button>
         </div>

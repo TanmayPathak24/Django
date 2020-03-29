@@ -14,9 +14,6 @@
       <form name="form" action="/Blog/new_blog_entry/" method="POST">
         {% csrf_token %}
         <div class="form-group">
-          {{form.author|as_crispy_field}}
-        </div>
-        <div class="form-group">
           {{form.title|as_crispy_field}}
         </div>
         <div class="form-group">

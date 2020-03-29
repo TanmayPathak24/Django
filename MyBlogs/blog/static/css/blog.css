@@ -98,10 +98,14 @@ input, textarea {
 }
 
 .my-blog-display-publish-date p{
-  text-align: right;
+  text-align: left;
 }
 
 .my-blog-date select{
   display: inline;
   width: 33.33%;
+}
+
+.my-blog-small {
+  font-size: 15px;
 }
