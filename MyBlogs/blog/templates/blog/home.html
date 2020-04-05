@@ -1,4 +1,14 @@
-{% extends 'blog/base.html' %} {% load static %} {% block content %}
+<!-- extending base.html -->
+{% extends 'blog/base.html' %} 
+{% load static %} 
+
+<!-- set page title -->
+{% block title %}
+MyBlogs
+{% endblock title%}
+
+<!-- home content -->
+{% block content %}
 <!-- Page Content -->
 <div class="container my-blog-container">
   <div class="row">

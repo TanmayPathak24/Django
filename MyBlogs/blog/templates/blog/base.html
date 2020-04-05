@@ -8,14 +8,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap.min.css'%}" >
+    <!-- <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap.min.css'%}">-->
     <link rel="stylesheet" href="{% static '/css/blog.css' %}">
-    <link rel="stylesheet" href="{% static '/css/new_blog.css' %}">
-    {% if title %}
-    <title>{{title}}</title>
-    {% else %}
-    <title>MyBlogs</title>
-    {% endif %}
+    <title>{% block title %}{% endblock %}</title>
+
+    {% load bootstrap4 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+    {% bootstrap_javascript jquery=True %}
 </head>
 
 <body>
@@ -63,11 +63,13 @@
                         {% endif %}
                     </ul>
 
-                    <form class="form-inline my-2 my-lg-0" action="{% url 'blog_search' %}">
-                        <input class="form-control mr-sm-2" type="search" placeholder="Search Blog" aria-label="Search" name="content">
+                    <form class="form-inline my-2 my-lg-0" action="{% url 'blog_search' %}" method="POST">
+                        {% csrf_token %}
+                        <input class="form-control mr-sm-2" type="search" placeholder="Search Blog" aria-label="Search"
+                            name="content">
                         <button class="btn btn-success my-2 my-sm-0" type="submit">Search</button>
                     </form>
-                    
+
                     <!--start- logout button -->
                     <!--user is able to logout once it is already logged in-->
                     {% if box.avatar %}
@@ -86,7 +88,7 @@
     </div>
     <div class="row">
         <div class="col">
-            <div class="container">
+            <div>
                 <!-- here we have the rest of the templates -->
                 {% block content %}{% endblock %}
             </div>

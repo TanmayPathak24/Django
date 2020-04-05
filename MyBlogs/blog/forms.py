@@ -57,5 +57,10 @@ class AuthorSignIn(forms.ModelForm):
                 }
 
 
+class LoginForm(forms.Form):
+    avatar = forms.CharField(label='Avatar',max_length=20,required=True,widget=forms.TextInput)
+    password = forms.CharField(label='Password',max_length=20,required=True,widget=forms.PasswordInput)
+
+
 class Input(forms.Form):
     content = forms.TextInput()

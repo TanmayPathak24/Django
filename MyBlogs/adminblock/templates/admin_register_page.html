@@ -1,0 +1,44 @@
+{% extends 'admin_home.html' %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block content %}
+<div>
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+
+            {% if error %}
+            <div class="alert alert-danger">
+                {{error.message}}
+              </div>
+            {% endif %}
+            
+            <div class="container my-new-blog-container">
+                <div class="my-blog-title">
+                    <h4>Admin Registration</h4>
+                </div>
+                <hr>
+                <form name="form" action="/Ad/new/admin/confirm" method="POST">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        {{form.admin_name|as_crispy_field}}
+                    </div>
+                    <div class="form-group">
+                        {{form.avatar|as_crispy_field}}
+                    </div>
+                    <div class="form-group">
+                        {{form.description|as_crispy_field}}
+                    </div>
+                    <div class="form-group">
+                        {{form.password|as_crispy_field}}
+                    </div>
+                    <div class="my-button">
+                        <button type="submit" class="btn btn-success">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+{% endblock content%}

@@ -6,17 +6,7 @@ import datetime
 
 
 def home(request):
-    posts = getBlogs()
-    temp = []
-    # filter the posts on the basis on their content length
-    for post in posts:
-        if len(post['content']) > 200:
-            post['content'] = post['content'][0:200] + " ...."
-            post['length_status'] = True
-        else:
-            post['length_status'] = False
-        temp.append(post)
-    posts = temp
+    posts = getPosts()
     context = {'posts': posts}
     # check weather user is logged in or not
     context = checkUserLogin(request, context)
@@ -133,28 +123,41 @@ def signup(request):
 
 from .forms import AuthorSignIn
 def sign_in_page(request):
-    sign_in_form = AuthorSignIn()
-    context = {'form':sign_in_form}
+    login_form = LoginForm()
+    context = {'form':login_form}
     err = getErrorMessage(request)
     if err is  not False:
         context['err'] = {'msg':err}
     return render(request, 'blog/signin.html', context)
 
 
+#user & admin login
+from .forms import LoginForm
+from adminblock.models import Admin
 def signin(request):
-    sing_in_form = AuthorSignIn(request.POST)
-    if sing_in_form.is_valid():
-        # check for the user in the database
-        user_avatar = sing_in_form.cleaned_data['avatar']
-        user_password = sing_in_form.cleaned_data['password']
-        filter = Author.objects.filter(avatar__exact=user_avatar).filter(password__exact=user_password)
-        if len(filter) == 1:
-            setUserToSession(request, user_avatar)
-            return HttpResponseRedirect("/")
+    if request.method == 'POST':
+        login_form = LoginForm(request.POST)
+        if login_form.is_valid():
+            avatar = login_form.cleaned_data['avatar']
+            password = login_form.cleaned_data['password']
+
+            admin = Admin.objects.filter(avatar__exact=avatar).filter(password__exact=password)
+            if len(admin) == 1:
+                # we found an admin
+                setAdminToSession(request, avatar)
+                return HttpResponseRedirect('/Ad/home')
+            else:
+                author = Author.objects.filter(avatar__exact=avatar).filter(password__exact=password)
+                if len(author) == 1:
+                    # we get author
+                    setUserToSession(request, avatar)
+                    return HttpResponseRedirect("/")
+                else:
+                    # setting the error message to the session
+                    setErrorMessage(request, "Invalid Avatar / Password")
+                    return HttpResponseRedirect('/Blog/author/signin')
         else:
-            # setting the error message to the session
-            setErrorMessage(request, "Invalid Avatar / Password")
-            return HttpResponseRedirect('/Blog/author/signin')
+            return HttpResponseRedirect("/")
 
 
 def logout(request):
@@ -172,12 +175,17 @@ def getAuthorIdAndAvatar():
 
 from .forms import Input
 def search(request):
-    content = Input(request.POST)
-    print(content)
-    if content.is_valid():
-        print("-------------------------------------------------------")
-        print(content)
-    return HttpResponseRedirect("/")
+    if request.method == 'POST':
+        content = request.POST['content']
+        if len(content) == 0:
+            return HttpResponseRedirect("/")
+        else:
+            posts = getPosts(content)
+            context = {'posts': posts}
+            # check weather user is logged in or not
+            context = checkUserLogin(request, context)
+            return render(request, 'blog/home.html', context)
+
 
 # utility functions
 def getBlogs():
@@ -196,8 +204,38 @@ def getBlogs():
         posts.append(temp)
     return posts
 
+def getPosts(*input):
+    posts = []
+    id_to_avatar = getAuthorIdAndAvatar()
+    blogs = Blog.objects.all()
+
+    for sample in input:
+        blogs = blogs.filter(title__icontains=sample)
+
+    for blog in blogs:
+        temp = {
+            'id': blog.id,
+            'avatar' :id_to_avatar[blog.author_id],
+            'title': blog.title,
+            'publish_date': blog.publish_date,
+            'content': blog.content,
+            'last_modified': blog.last_modified
+        }
+        if len(temp['content']) > 200:
+            temp['content'] = temp['content'][0:200] + " ...."
+            temp['length_status'] = True
+        else:
+            temp['length_status'] = False
+        posts.append(temp)
+    return posts
+
+
 def setUserToSession(request, avatar):
         request.session['user'] = avatar
+
+
+def setAdminToSession(request, avatar):
+    request.session['admin'] = avatar
 
 def getUser(request):
     if request.session.has_key('user'):
@@ -230,3 +268,4 @@ def getUserId(request):
 
 def getAvatar(user_id):
     return Author.objects.get(pk=user_id).avatar
+

@@ -1,0 +1,10 @@
+.my-blog-logo {
+    min-width: 35px;
+    min-height: 35px;
+    max-width: 50px;
+    max-height: 50px;
+    width: 2vw;
+    height: 2vw;
+    margin: 0 0;
+    padding: 0 0;
+}
