@@ -1,0 +1,51 @@
+{% extends 'admin_template.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-2"></div>
+        <div class="col-8">
+            <div class="my-container">
+                <div class="my-blog-title">
+                    <h4>Delete Post</h4>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col">
+                        <div class="row my-block">
+                            <div class="col">
+                                <table class="table table-striped">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Title</th>
+                                            <th scope="col">Publish Date</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>{{blog.title}}</td>
+                                            <td>{{blog.publish_date}}</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="row my-block">
+                            <div class="col my-button">
+                                <a class="btn btn-primary" href="/Ad/home">Cancel</a>
+                            </div>
+                            <div class="col my-button">
+                                <a class="btn btn-danger"
+                                    href="{% url 'admin_blog_delete' id=blog.id %}">Confirm</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-2"></div>
+    </div>
+</div>
+{% endblock content %}

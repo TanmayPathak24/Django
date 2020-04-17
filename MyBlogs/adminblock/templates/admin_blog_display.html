@@ -1,0 +1,48 @@
+{% extends 'admin_template.html' %}
+
+{% load static %}
+
+{% block content %}
+<div class="container">
+  <div class="row">
+    <div class="col-1"></div>
+    <div class="col-10 my-container">
+      <div class="row">
+        <div class="col my-block">
+          <h3>{{blog.title}}&nbsp;&nbsp;&nbsp;<small class="my-blog-small"><a href="#">{{blog.avatar}}</a></small></h3>
+        </div>
+      </div>
+
+      <!--start- blog-display-header-->
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col my-blog-display my-blog-display-publish-date">
+              <p><small><b>@Publish Date:</b>&nbsp;&nbsp;&nbsp;{{blog.publish_date}}</small></p>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col my-blog-display my-blog-display-publish-date">
+              <p><small><b>@Last Modified</b>&nbsp;&nbsp;&nbsp;{{blog.last_modified}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!--end- blog-display-header-->
+
+      <hr>
+      <div class="row">
+        <div class="col">
+          <div class="my-blog-text">{{blog.content|linebreaks}}</div>
+        </div>
+      </div>
+      <div class="row my-block">
+        <div class="col my-button">
+          <a class="btn btn-danger" href="{% url 'admin_blog_delete_display' id=blog.id %}">Delete</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-1"></div>
+  </div>
+</div>
+{% endblock content %}

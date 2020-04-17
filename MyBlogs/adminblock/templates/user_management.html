@@ -1,0 +1,32 @@
+{% extends 'admin_template.html' %}
+{% load static %}
+
+{% load bootstrap4 %}
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+{% bootstrap_javascript jquery=True %}
+
+{% block content %}
+<div class="container">
+    <table class="table">
+      <thead class="thead">
+        <tr>
+          <th class="" scope="col">#</th> 
+          <th class="" scope="col">Author</th>
+          <th class="" scope="col">Avatar</th>
+          <th scope="col">Delete</th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for user in users %}
+      <tr>
+        <th scope="row">{{ forloop.counter }}</th>
+        <td>{{user.name}}</td>
+        <td><a href="{% url 'admin_user_display' id=user.id %}">{{user.avatar}}</a></td>
+        <td><a href="{% url 'admin_user_remove' id=user.id %}" class="btn btn-danger">Delete</a></td>
+      </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% endblock content %}

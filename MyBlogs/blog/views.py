@@ -187,6 +187,38 @@ def search(request):
             return render(request, 'blog/home.html', context)
 
 
+def blog_aulthor_display(request, avatar):
+    author = Author.objects.filter(avatar__exact=avatar)
+    context={}
+    temp = {
+        'name':author[0].author_name,
+        'avatar':author[0].avatar,
+        'desc':author[0].description
+    }
+    context['author'] = temp
+    context = checkUserLogin(request, context)
+    return render(request, 'blog/author_display.html', context=context)
+
+
+def blog_aulthor_blog_display(request):
+    author_id = getUserId(request)
+    blogs = Blog.objects.filter(author_id__exact=author_id)
+    posts = []
+    for blog in blogs:
+        temp = {
+            'id': blog.id,
+            'title': blog.title,
+            'content': blog.content,
+            'publish_date': blog.publish_date,
+            'last_modified': blog.last_modified
+        }
+        posts.append(temp)
+    context = {}
+    context['blogs'] = posts
+    context = checkUserLogin(request, context)
+    return render(request, 'blog/blog_author_blog_display.html', context=context)
+
+
 # utility functions
 def getBlogs():
     posts = []

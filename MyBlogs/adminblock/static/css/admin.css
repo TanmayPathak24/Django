@@ -1,0 +1,19 @@
+.admin_main_block{
+    margin-top: 3vh;
+}
+
+.admin_table_sno{
+    width: 3vw;
+}
+
+.admin_table_blog_name{
+    width: 50vw;
+}
+
+.admin_table_author_name{
+    width: 20vw;
+}
+
+.admin_table_button{
+    width: 100%;
+}

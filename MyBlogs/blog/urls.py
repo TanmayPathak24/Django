@@ -17,4 +17,6 @@ urlpatterns = [
     path('Blog/author/signin/confirm', views.signin, name="author_login"),
     path('Blog/author/logout', views.logout, name="author_logout"),
     path('Blog/search', views.search, name="blog_search"),
+    path('Blog/author/display/<str:avatar>', views.blog_aulthor_display, name="blog_author_display"),
+    path('Blog/author/blog/display', views.blog_aulthor_blog_display, name="blog_author_blog_display")
 ]

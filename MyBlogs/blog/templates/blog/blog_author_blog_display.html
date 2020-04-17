@@ -1,0 +1,86 @@
+<!--Loding the base.html -->
+{% extends 'blog/base.html' %}
+
+<!--Load static files-->
+{% load static %}
+
+<!--Load the block -->
+{% block content %}
+<!-- Page Content -->
+<div class="container my-blog-container">
+    <div class="row">
+      <div class="col-md-2"></div>
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
+        {% for blog in blogs %}
+        <div class="row container-fluid">
+          <div class="col">
+  
+            <!--start- Blog Post -->
+            <div class="container-fluid my-blog">
+              <div class="my-blog-title">
+                <h4>{{blog.title}}</h4>
+              </div>
+              <hr />
+              <div class="my-blog-summary my-block">
+                <p>{{blog.content}}
+  
+                  <!-- display read more when the content is large-->
+                  {% if blog.length_status %}
+                  <a href="{% url 'blog_display' blog_id=post.id %}">ReadMore</a>
+                  {% endif %}
+  
+                </p>
+              </div>
+              <hr>
+  
+              <!--start- blog footer-->
+              <div class="my-blog-footer">
+  
+                <!--start- blog details-->
+                <div class="row my-block">
+                  <div class="col">
+                    <div class="row">
+                      <div class="col my-blog-author">
+                        <small>@Author:&nbsp;&nbsp;&nbsp;<a href="{% url 'blog_author_display' avatar=post.avatar %}">{{post.avatar}}</a></small>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col my-blog-small">
+                        <small>@Publish Date:&nbsp;&nbsp;&nbsp;{{post.publish_date}}</small>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col my-blog-small">
+                        <small>@Last Modified:&nbsp;&nbsp;&nbsp;{{post.last_modified}}</small>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- end- blog details-->
+  
+                <!--start- blog update-->
+                <!--<div class="row my-block">
+                  <div class="col my-button">
+                    <a class="btn btn-primary" href="{% url 'blog_update_page' blog_id=post.id %}">Upadte</a>
+                  </div>
+                  <div class="col my-button">
+                    <a class="btn btn-danger" href="{% url 'blog_delete_confirmation' blog_id=post.id %}">Delete</a>
+                  </div>
+                </div>-->
+                <!--end- blog update-->
+  
+              </div>
+              <!--end- blog footer-->
+  
+            </div>
+            <!--end- Blog Post -->
+  
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div class="col-md-2"></div>
+    </div>
+  </div>
+{% endblock content %}

@@ -45,7 +45,7 @@ MyBlogs
                 <div class="col">
                   <div class="row">
                     <div class="col my-blog-author">
-                      <small>@Author:&nbsp;&nbsp;&nbsp;<a href="#">{{post.avatar}}</a></small>
+                      <small>@Author:&nbsp;&nbsp;&nbsp;<a href="{% url 'blog_author_display' avatar=post.avatar %}">{{post.avatar}}</a></small>
                     </div>
                   </div>
                   <div class="row">
@@ -63,14 +63,14 @@ MyBlogs
               <!-- end- blog details-->
 
               <!--start- blog update-->
-              <div class="row my-block">
+              <!--<div class="row my-block">
                 <div class="col my-button">
                   <a class="btn btn-primary" href="{% url 'blog_update_page' blog_id=post.id %}">Upadte</a>
                 </div>
                 <div class="col my-button">
                   <a class="btn btn-danger" href="{% url 'blog_delete_confirmation' blog_id=post.id %}">Delete</a>
                 </div>
-              </div>
+              </div>-->
               <!--end- blog update-->
 
             </div>

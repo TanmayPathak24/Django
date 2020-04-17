@@ -9,9 +9,11 @@
 
     <!-- Bootstrap CSS -->
     <!-- <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap.min.css'%}">-->
+    
     <link rel="stylesheet" href="{% static '/css/blog.css' %}">
+    <link rel="stylesheet" href="{% static '/css/logo.css' %}">
     <title>{% block title %}{% endblock %}</title>
-
+  
     {% load bootstrap4 %}
     {% bootstrap_css %}
     {% bootstrap_javascript %}
@@ -27,7 +29,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a class="navbar-brand" href="/">My Blogs</a>
+                    <a class="navbar-brand" href="/">
+                        <img class="my-blog-logo rounded-circle" src='{% static "img/logo.jpg" %}' alt="">
+                    </a>
                     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                         <li class="nav-item active">
                             <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
@@ -37,17 +41,20 @@
                         <!-- User is able to add new block only when user is logged in-->
                         {% if box.avatar %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/Blog/newBlog">New Blog</a>
+                            <a class="nav-link" href="/Blog/newBlog">AddBlog</a>
                         </li>
                         {% else %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/Blog/author/signin">New Blog</a>
+                            <a class="nav-link" href="/Blog/author/signin">AddBlog</a>
                         </li>
                         {% endif %}
                         <!-- end-New Blog-->
 
 
                         {% if box.avatar %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Blog/author/blog/display">MyBlogs</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{box.avatar}}</a>
                         </li>
@@ -58,7 +65,7 @@
                             <a class="nav-link" href="/Blog/author/signin">LogIn</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/Blog/author/signup">Sign up</a>
+                            <a class="nav-link" href="/Blog/author/signup">SignUp</a>
                         </li>
                         {% endif %}
                     </ul>

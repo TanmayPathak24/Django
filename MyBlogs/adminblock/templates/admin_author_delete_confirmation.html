@@ -1,0 +1,16 @@
+{% extends 'admin_template.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <div class="row">
+      <div class="col-1"></div>
+      <div class="col-10 my-container">
+        {{user}}
+        <a class="btn btn-primary" href="/Ad/user/management">Cancel</a>
+        <a class="btn btn-danger" href="{% url 'admin_user_remove_confirm' id=user.id %}">Delete User</a>
+      </div>
+      <div class="col-1"></div>
+    </div>
+  </div>
+{% endblock content %}
