@@ -11,6 +11,7 @@
     <!-- <link rel="stylesheet" href="{% static '/css/bootstrap/bootstrap.min.css'%}">-->
     
     <link rel="stylesheet" href="{% static '/css/blog.css' %}">
+    <link rel="stylesheet" href="{% static '/css/user_management.css' %}">
     <link rel="stylesheet" href="{% static '/css/logo.css' %}">
     <title>{% block title %}{% endblock %}</title>
   
@@ -53,7 +54,7 @@
 
                         {% if box.avatar %}
                         <li class="nav-item">
-                            <a class="nav-link" href="/Blog/author/blog/display">MyBlogs</a>
+                            <a class="nav-link" href="{% url 'blog_author_blog_display' %}">MyBlogs</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="#">{{box.avatar}}</a>

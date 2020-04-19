@@ -1,12 +1,14 @@
-<!--loading base template-->
 {% extends 'blog/user_management.html' %}
-<!-- loading crispy forms-->
-{% load crispy_forms_tags %}
-<!--loading css and js-->
+
+<!--Load static files-->
 {% load static %}
 
-<!-- override content block-->
+<!-- loading crispy forms-->
+{% load crispy_forms_tags %}
+
+<!--Load the block -->
 {% block user_account_content %}
+
 <div class="row">
     <div class="col-2"></div>
 
@@ -14,17 +16,23 @@
     <div class="col-8">
         <div class="container my-new-blog-container">
             <div class="my-blog-title">
-                <h4>Update Post</h4>
+                <h4>Bio Update</h4>
             </div>
             <hr>
 
             <!--start- form-->
-            <form name="form" action="{% url 'blog_update' blog_id=blog_id %}" method="POST">{% csrf_token %}
+            <form name="form" action="{% url 'blog_author_bio_update' %}" method="POST">{% csrf_token %}
                 <div class="form-group">
-                    {{form.title|as_crispy_field}}
+                    {{form.name|as_crispy_field}}
                 </div>
-                <div class="form-group my-blog-text">
-                    {{form.content|as_crispy_field}}
+                <div class="form-group">
+                    {{form.avatar|as_crispy_field}}
+                </div>
+                <div class="form-group">
+                    {{form.description|as_crispy_field}}
+                </div>
+                <div class="form-group">
+                    {{form.password|as_crispy_field}}
                 </div>
                 <div class="my-blog-update-button">
                     <button type="submit" class="btn btn-success">
@@ -40,4 +48,5 @@
 
     <div class="col-2"></div>
 </div>
+
 {% endblock user_account_content %}

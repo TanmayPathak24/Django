@@ -50,7 +50,9 @@ def blog_update_page(request, blog_id):
             'title': my_blog.title,
             'content': my_blog.content
         })
-    return render(request, 'blog/blog_update.html', {'form': my_blog_form,'blog_id':blog_id})
+    context = {'form': my_blog_form,'blog_id':blog_id}
+    context = checkUserLogin(request, context)
+    return render(request, 'blog/blog_update.html', context=context)
 
 
 def blog_update(request, blog_id):
@@ -61,7 +63,7 @@ def blog_update(request, blog_id):
         blog.content = MyBlog.cleaned_data['content']
         blog.last_modified = datetime.datetime.today()
         blog.save()
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect("/Blog/author/blog/display")
 
 
 # Loading the delete-confirmation block page
@@ -79,7 +81,7 @@ def delete_confirmation_page(request, blog_id):
 def delete_post(request, blog_id):
     blog = Blog.objects.get(pk=blog_id)
     blog.delete()
-    return HttpResponseRedirect("/")
+    return HttpResponseRedirect("/Blog/author/blog/display")
 
 
 # Function to display the post
@@ -201,6 +203,7 @@ def blog_aulthor_display(request, avatar):
 
 
 def blog_aulthor_blog_display(request):
+    print("called ----------------------------------------------------")
     author_id = getUserId(request)
     blogs = Blog.objects.filter(author_id__exact=author_id)
     posts = []
@@ -216,7 +219,38 @@ def blog_aulthor_blog_display(request):
     context = {}
     context['blogs'] = posts
     context = checkUserLogin(request, context)
+    print(context)
     return render(request, 'blog/blog_author_blog_display.html', context=context)
+
+
+from .forms import AuthorInfoUpdate
+# author management functions
+def author_update_page(request):
+    author_object = Author.objects.filter(pk=getUserId(request))
+    author_info_form = AuthorInfoUpdate(
+        initial={
+            'name': author_object[0].author_name,
+            'avatar': author_object[0].avatar,
+            'password':author_object[0].password,
+            'description':author_object[0].description
+        }
+    )
+    context = {
+        'form':author_info_form
+    }
+    return render(request, 'blog/author_bio_update.html', context=context)
+
+
+def author_bio_update(request):
+    author_info_form = AuthorInfoUpdate(request.POST)
+    if author_info_form.is_valid():
+        author = Author.objects.get(pk=getUserId(request))
+        author.author_name = author_info_form.cleaned_data['name']
+        author.avatar = author_info_form.cleaned_data['avatar']
+        author.description  = author_info_form.cleaned_data['description']
+        author.password = author_info_form.cleaned_data['password']
+        author.save()
+    return HttpResponseRedirect("/Blog/author/blog/display")
 
 
 # utility functions

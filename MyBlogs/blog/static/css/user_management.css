@@ -1,0 +1,77 @@
+.user_management_pannel {
+    background-color: black;
+    height: 100vh;
+    box-shadow: 10px 10px 8px 5px #888888;
+}
+
+
+/* user image management */
+.user_management_pannel .user_image_block{
+    margin-top: 40px;
+    margin-bottom: 20px;
+}
+
+.user_management_pannel .user_image {
+    height: 100px;
+    width: 100px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* user management options */
+
+.user_management_pannel .user_account_options {
+    margin-top: 2vw;
+}
+
+.user_management_pannel .user_account_options ul {
+    list-style-type: none;
+    text-align: center;
+    padding-left: 0px;
+}
+
+.user_management_pannel .user_account_options ul li {
+    font-size: 22px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.user_management_pannel .user_account_options ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.user_management_pannel .user_account_options ul li a:hover{
+    font-weight: 500;
+}   
+
+/* user management content */
+
+.user_content {
+    margin-top: 35px;
+}
+
+.user_content .blog_box {
+    margin-top: 40px;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 10px 10px 8px 5px #888888;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.user_content .blog_box .blog_title {
+    text-align: center;
+    margin-top: 8px;
+    font-size: 25px;
+}
+
+.user_content .blog_box .blog_content {
+    text-justify: auto;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.user_content .blog_box .blog_button a {
+    width: 100%;
+}

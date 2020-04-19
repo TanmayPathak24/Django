@@ -64,3 +64,9 @@ class LoginForm(forms.Form):
 
 class Input(forms.Form):
     content = forms.TextInput()
+
+class AuthorInfoUpdate(forms.Form):
+    name = forms.CharField(label="Author Name", max_length=50, widget=forms.TextInput)
+    avatar = forms.CharField(label='Avatar', max_length=20, widget=forms.TextInput)
+    password = forms.CharField(label='New Password', max_length=20, widget=forms.PasswordInput)
+    description = forms.CharField(widget=forms.Textarea)

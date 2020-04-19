@@ -1,0 +1,45 @@
+<!--Loding the base.html -->
+{% extends 'blog/base.html' %}
+
+<!--Load static files-->
+{% load static %}
+
+<!-- title of page -->
+{% block title %}MyBlog/User Account Management{% endblock title%}
+
+<!--Load the block -->
+{% block content %}
+
+<div class="container-fluid">
+  <div class="row">
+    <!-- user management pannel -->
+    <div class="col-md-2 col-lg-2 col-xl-2 user_management_pannel">
+      <div class="row">
+        <!-- user account image -->
+        <div class="col user_image_block" style="border: 1px solid black;">
+         <a href="/Blog/author/blog/display">
+          <img src="{% static 'images/user_image.jpg'%}" class="rounded-circle img-fluid user_image"
+          alt="Cinque Terre" />
+         </a>
+        </div>
+      </div>
+      <!-- user account updation-->
+      <div class="row user_account_options">
+        <div class="col">
+          <ul>
+            <li><a href="/Blog/author/bio/update">Account Update</a></li>
+            <li><a href="/Blog/author/blog/display">My Blogs</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- user contents -->
+    <div class="col-md-10 col-lg-10 col-xl-10">
+      {% block user_account_content %}
+      {% endblock user_account_content%}
+    </div>
+  </div>
+</div>
+
+{% endblock content %}

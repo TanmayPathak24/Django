@@ -18,5 +18,7 @@ urlpatterns = [
     path('Blog/author/logout', views.logout, name="author_logout"),
     path('Blog/search', views.search, name="blog_search"),
     path('Blog/author/display/<str:avatar>', views.blog_aulthor_display, name="blog_author_display"),
-    path('Blog/author/blog/display', views.blog_aulthor_blog_display, name="blog_author_blog_display")
+    path('Blog/author/blog/display', views.blog_aulthor_blog_display, name="blog_author_blog_display"),
+    path('Blog/author/bio/update', views.author_update_page, name="blog_author_bio_update_page"),
+    path('Blog/author/bio/update/confirm', views.author_bio_update, name="blog_author_bio_update")
 ]
